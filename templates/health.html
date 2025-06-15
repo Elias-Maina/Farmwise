@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Health Management</h1>
+
+<div class="form-section">
+    <h3>Add Health Record</h3>
+    <form method="post" action="{{ url_for('add_health_record') }}" class="form-grid">
+        <div class="form-group">
+            <label for="animal_id">Select Animal:</label>
+            <select id="animal_id" name="animal_id" required>
+                <option value="">Select Animal</option>
+                {% for animal in animals %}
+                <option value="{{ animal.id }}">{{ animal.tag_number }} - {{ animal.animal_type }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="check_date">Check Date:</label>
+            <input type="date" id="check_date" name="check_date" required>
+        </div>
+        <div class="form-group">
+            <label for="temperature">Temperature (°C):</label>
+            <input type="number" id="temperature" name="temperature" step="0.1">
+        </div>
+        <div class="form-group">
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" name="weight" step="0.1">
+        </div>
+        <div class="form-group">
+            <label for="symptoms">Symptoms:</label>
+            <textarea id="symptoms" name="symptoms" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="treatment">Treatment:</label>
+            <textarea id="treatment" name="treatment" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="vet_notes">Vet Notes:</label>
+            <textarea id="vet_notes" name="vet_notes" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Add Health Record</button>
+        </div>
+    </form>
+</div>
+
+<div class="table-container">
+    <h3>Health Records</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Animal</th>
+                <th>Temperature</th>
+                <th>Weight</th>
+                <th>Symptoms</th>
+                <th>Treatment</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in health_records %}
+            <tr>
+                <td>{{ record.check_date }}</td>
+                <td>{{ record.tag_number }} - {{ record.animal_type }}</td>
+                <td>{{ record.temperature }}°C</td>
+                <td>{{ record.weight }} kg</td>
+                <td>{{ record.symptoms }}</td>
+                <td>{{ record.treatment }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

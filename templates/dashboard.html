@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Dashboard</h1>
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>Total Animals</h3>
+        <p class="stat-number">{{ total_animals }}</p>
+    </div>
+    <div class="stat-card">
+        <h3>Sick Animals</h3>
+        <p class="stat-number sick">{{ sick_animals }}</p>
+    </div>
+    <div class="stat-card">
+        <h3>Fed Today</h3>
+        <p class="stat-number">{{ fed_today }}</p>
+    </div>
+    <div class="stat-card">
+        <h3>Health Checks Today</h3>
+        <p class="stat-number">{{ health_checks_today }}</p>
+    </div>
+</div>
+{% endblock %}

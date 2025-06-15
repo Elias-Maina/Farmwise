@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Animals Management</h1>
+
+<div class="form-section">
+    <h3>Add New Animal</h3>
+    <form method="post" action="{{ url_for('add_animal') }}" class="form-grid">
+        <div class="form-group">
+            <label for="tag_number">Tag Number:</label>
+            <input type="text" id="tag_number" name="tag_number" required>
+        </div>
+        <div class="form-group">
+            <label for="animal_type">Animal Type:</label>
+            <select id="animal_type" name="animal_type" required>
+                <option value="">Select Type</option>
+                <option value="Cattle">Cattle</option>
+                <option value="Goat">Goat</option>
+                <option value="Sheep">Sheep</option>
+                <option value="Pig">Pig</option>
+                <option value="Chicken">Chicken</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="breed">Breed:</label>
+            <input type="text" id="breed" name="breed">
+        </div>
+        <div class="form-group">
+            <label for="birth_date">Birth Date:</label>
+            <input type="date" id="birth_date" name="birth_date">
+        </div>
+        <div class="form-group">
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" name="weight" step="0.1">
+        </div>
+        <div class="form-group">
+            <label for="health_status">Health Status:</label>
+            <select id="health_status" name="health_status">
+                <option value="Healthy">Healthy</option>
+                <option value="Sick">Sick</option>
+                <option value="Under Treatment">Under Treatment</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Add Animal</button>
+        </div>
+    </form>
+</div>
+
+<div class="table-container">
+    <h3>All Animals</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tag Number</th>
+                <th>Type</th>
+                <th>Breed</th>
+                <th>Birth Date</th>
+                <th>Weight</th>
+                <th>Health Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for animal in animals %}
+            <tr>
+                <td>{{ animal.tag_number }}</td>
+                <td>{{ animal.animal_type }}</td>
+                <td>{{ animal.breed }}</td>
+                <td>{{ animal.birth_date }}</td>
+                <td>{{ animal.weight }} kg</td>
+                <td>{{ animal.health_status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

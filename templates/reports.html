@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Reports & Analytics</h1>
+
+<div class="stats-grid">
+    <div class="chart-container">
+        <h3>Animal Distribution by Type</h3>
+        {% for animal_type in animal_types %}
+        <p>{{ animal_type.animal_type }}: {{ animal_type.count }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="chart-container">
+        <h3>Health Status Overview</h3>
+        {% for status in health_status %}
+        <p>{{ status.health_status }}: {{ status.count }}</p>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="chart-container">
+    <h3>Monthly Feeding Costs</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Total Cost ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cost in monthly_costs %}
+            <tr>
+                <td>{{ cost.month }}</td>
+                <td>${{ cost.total_cost }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="chart-container">
+    <h3>Recent Health Issues</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Animal</th>
+                <th>Symptoms</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for issue in health_issues %}
+            <tr>
+                <td>{{ issue.tag_number }} - {{ issue.animal_type }}</td>
+                <td>{{ issue.symptoms }}</td>
+                <td>{{ issue.check_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

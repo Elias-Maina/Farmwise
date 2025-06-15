@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Farm Management System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+
+<body>
+    <div id=":loading spinner">
+        <div class="dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+    {% if session.loggedin %}
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-title">🐄 Farm Management</h1>
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ url_for('animals') }}">Animals</a></li>
+                <li><a href="{{ url_for('feeding') }}">Feeding</a></li>
+                <li><a href="{{ url_for('health') }}">Health</a></li>
+                <li><a href="{{ url_for('reports') }}">Reports</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    {% endif %}
+
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+    <script>
+        window.addEventListener('load', () => {
+            const spinner = document.getElementById('loading-spinner');
+            spinner.style.opacity = '0';
+            setTimeout(() => spinner.style.display = 'none', 400);
+        });
+    </script>
+    <hr>
+    &lt;&lt;&lt; &copy; MAINA ELIAS MWANGI &gt;&gt;&gt;
+</body>
+
+
+
+</html>

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Feeding Management</h1>
+
+<div class="form-section">
+    <h3>Record Feeding</h3>
+    <form method="post" action="{{ url_for('add_feeding') }}" class="form-grid">
+        <div class="form-group">
+            <label for="animal_id">Select Animal:</label>
+            <select id="animal_id" name="animal_id" required>
+                <option value="">Select Animal</option>
+                {% for animal in animals %}
+                <option value="{{ animal.id }}">{{ animal.tag_number }} - {{ animal.animal_type }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="feed_type">Feed Type:</label>
+            <input type="text" id="feed_type" name="feed_type" required>
+        </div>
+        <div class="form-group">
+            <label for="quantity">Quantity (kg):</label>
+            <input type="number" id="quantity" name="quantity" step="0.1" required>
+        </div>
+        <div class="form-group">
+            <label for="feeding_date">Feeding Date:</label>
+            <input type="datetime-local" id="feeding_date" name="feeding_date" required>
+        </div>
+        <div class="form-group">
+            <label for="notes">Notes:</label>
+            <textarea id="notes" name="notes" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Record Feeding</button>
+        </div>
+    </form>
+</div>
+
+<div class="table-container">
+    <h3>Feeding Records</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Animal</th>
+                <th>Feed Type</th>
+                <th>Quantity</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in feeding_records %}
+            <tr>
+                <td>{{ record.feeding_date }}</td>
+                <td>{{ record.tag_number }} - {{ record.animal_type }}</td>
+                <td>{{ record.feed_type }}</td>
+                <td>{{ record.quantity }} kg</td>
+                <td>{{ record.notes }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
